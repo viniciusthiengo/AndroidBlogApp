@@ -1,0 +1,42 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <item name="android:windowBackground">@drawable/background</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="LoginCustomTheme" parent="Theme.AccountKit">
+        <!-- IMAGEM  DE BACKGROUND -->
+        <item name="com_accountkit_background">@drawable/background</item>
+        <!-- COR DE BACKGROUND, CASO NÃO DEFINA AO MENOS TRANSPARENTE, A IMAGEM NÃO APARECERÁ -->
+        <item name="com_accountkit_background_color">#44ffffff</item>
+        <!-- COR DA TOOLBAR -->
+        <item name="com_accountkit_primary_color">@color/colorPrimary</item>
+        <!-- COR DO TEXTO DA TOOLBAR -->
+        <item name="com_accountkit_primary_text_color">@color/colorPrimaryText</item>
+        <!-- COR DOS TEXTOS INFORMATIVOS -->
+        <item name="com_accountkit_secondary_text_color">@color/colorPrimaryText</item>
+        <!-- COR DA STATUS BAR -->
+        <item name="com_accountkit_status_bar_color">@color/colorPrimaryDark</item>
+        <!-- COR DE BACKGROUND DAS VIEWS DE ENTRADA DE DADOS -->
+        <item name="com_accountkit_input_background_color">@color/colorPrimaryLight</item>
+        <!-- COR DOS TEXTOS DAS VIEWS DE ENTRADA DE DADOS -->
+        <item name="com_accountkit_input_text_color">@color/colorPrimaryDark</item>
+        <!-- COR DE BACKGROUND DOS BUTTONS -->
+        <item name="com_accountkit_button_background_color">@color/colorPrimaryLight</item>
+        <!-- COR DOS TEXTOS DOS BUTTONS -->
+        <item name="com_accountkit_button_text_color">@color/colorPrimaryDark</item>
+    </style>
+</resources>

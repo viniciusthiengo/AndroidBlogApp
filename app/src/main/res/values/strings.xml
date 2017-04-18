@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Android Blog App</string>
+
+    <string name="navigation_drawer_open">Abrir navigation drawer</string>
+    <string name="navigation_drawer_close">Fechar navigation drawer</string>
+
+    <string name="FACEBOOK_APP_ID">655272048007605</string>
+    <string name="ACCOUNT_KIT_CLIENT_TOKEN">4b6ff170eec7548eca3c9a79455d0c9f</string>
+    <string name="ak_login_protocol_scheme">ak655272048007605</string>
+</resources>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:checked="true"
+            android:id="@+id/nav_todos"
+            android:title="Todos" />
+        <item
+            android:id="@+id/nav_iniciantes"
+            android:title="Para iniciantes" />
+        <item
+            android:id="@+id/nav_intermediarios"
+            android:title="Para intermediários" />
+        <item
+            android:id="@+id/nav_profissionais"
+            android:title="Para profissionais" />
+        <item
+            android:id="@+id/nav_web_android"
+            android:title="Web e Android" />
+        <item
+            android:id="@+id/nav_padroes"
+            android:title="Padrões" />
+    </group>
+
+    <item android:title="Configurações">
+        <menu>
+            <item
+                android:id="@+id/nav_conf_perfil"
+                android:icon="@drawable/ic_person"
+                android:title="Perfil" />
+            <item
+                android:id="@+id/nav_conf_notif"
+                android:icon="@drawable/ic_notification"
+                android:title="Notificação" />
+        </menu>
+    </item>
+
+</menu>
