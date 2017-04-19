@@ -13,8 +13,8 @@ public class PresenterLogin {
     private LoginActivity activity;
 
 
-    public PresenterLogin( LoginActivity activity ){
-        this.activity = activity;
+    public PresenterLogin( LoginActivity a ){
+        activity = a;
         model = new ModelLogin( this );
     }
 

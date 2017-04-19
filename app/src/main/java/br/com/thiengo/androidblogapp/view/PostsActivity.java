@@ -28,6 +28,7 @@ public class PostsActivity extends AppCompatActivity
     private PresenterPosts presenter;
     private PostsAdapter adapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,16 +36,16 @@ public class PostsActivity extends AppCompatActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbarFont( toolbar );
+        toolbarFontFamily( toolbar );
 
         presenter = new PresenterPosts( this );
         initDrawer( toolbar );
-        initViews();
+        initLista();
 
-        presenter.retrievePosts( savedInstanceState );
+        presenter.retrievePosts();
     }
 
-    private void toolbarFont( Toolbar toolbar ){
+    private void toolbarFontFamily( Toolbar toolbar ){
         TextView tv = (TextView) toolbar.getChildAt(0);
         Typeface font = Typeface.createFromAsset( getAssets(), "Timmana.ttf" );
         tv.setTypeface( font );
@@ -59,11 +60,12 @@ public class PostsActivity extends AppCompatActivity
 
         NavigationView navigation = (NavigationView) findViewById(R.id.nav_view);
         navigation.setNavigationItemSelectedListener(this);
-        setDataDrawerHeader( navigation );
+        setDataDrawerHeaderData( navigation );
     }
 
-    private void setDataDrawerHeader( NavigationView navigation ){
+    private void setDataDrawerHeaderData( NavigationView navigation ){
         LinearLayout ll = (LinearLayout) navigation.getHeaderView(0);
+
         ImageView ivProfile = (ImageView) ll.getChildAt(0);
         TextView tvNome = (TextView) ll.getChildAt(1);
         TextView tvProfissao = (TextView) ll.getChildAt(2);
@@ -76,7 +78,7 @@ public class PostsActivity extends AppCompatActivity
         tvProfissao.setText( presenter.getUser().getProfissao() );
     }
 
-    private void initViews() {
+    private void initLista() {
         super.onStart();
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_posts);
@@ -100,12 +102,6 @@ public class PostsActivity extends AppCompatActivity
 
     public void showProgressBar( int visibilidade ){
         findViewById(R.id.pb_loading).setVisibility( visibilidade );
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putParcelableArrayList( Post.POSTS_KEY, presenter.getPosts() );
-        super.onSaveInstanceState(outState);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

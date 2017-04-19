@@ -45,6 +45,7 @@ public class Post implements Parcelable {
         this.sumario = sumario;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -58,7 +59,7 @@ public class Post implements Parcelable {
         dest.writeString(this.sumario);
     }
 
-    public Post() {}
+    public Post(){}
 
     protected Post(Parcel in) {
         this.id = in.readLong();

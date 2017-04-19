@@ -19,19 +19,23 @@ import br.com.thiengo.androidblogapp.presenter.PresenterLogin;
 import br.com.thiengo.androidblogapp.presenter.User;
 
 public class LoginActivity extends AppCompatActivity {
-
     /*
-     * CÓDIGO INTEIRO ALEATÓRIO PARA POSTERIOR
-     * VERIFICAÇÃO NO ON-ACTIVITY-RESULT
+     * CÓDIGO INTEIRO ALEATÓRIO PARA POSTERIOR VERIFICAÇÃO
+     * EM onActivityResult()
      * */
     public static final int APP_REQUEST_CODE = 665;
 
     private PresenterLogin presenter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        /*
+         * PARA POSTERIOR ENVIO / VERIFICAÇÃO DE DADOS
+         * NO BACKEND WEB
+         * */
         presenter = new PresenterLogin( LoginActivity.this );
 
         /* VERIFICA SE O USUÁRIO JÁ ESTÁ CONECTADO */
@@ -51,15 +55,15 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AccountKitActivity.class);
 
         AccountKitConfiguration
-                .AccountKitConfigurationBuilder configurationBuilder =
-                new AccountKitConfiguration
-                        .AccountKitConfigurationBuilder(
+            .AccountKitConfigurationBuilder configurationBuilder =
+            new AccountKitConfiguration
+                    .AccountKitConfigurationBuilder(
                         LoginType.EMAIL,
                         AccountKitActivity.ResponseType.TOKEN );
 
         intent.putExtra(
-                AccountKitActivity.ACCOUNT_KIT_ACTIVITY_CONFIGURATION,
-                configurationBuilder.build() );
+            AccountKitActivity.ACCOUNT_KIT_ACTIVITY_CONFIGURATION,
+            configurationBuilder.build() );
 
         startActivityForResult( intent, APP_REQUEST_CODE );
     }
@@ -84,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
             else {
                 /*
                  * TUDO CERTO, VAMOS A OBTENÇÃO DE DADOS DE LOGIN (EMAIL E ID)
-                 * E ASSIM PROSSEGUIR COM O ACESSO A ÁREA DE POST
+                 * E ASSIM PROSSEGUIR COM O ACESSO A ÁREA DE POSTS
                  * */
                 getUserLoginData();
             }
@@ -100,9 +104,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onError(final AccountKitError error) {
-                Log.i("log", "Error: "+error.getUserFacingMessage());
-            }
+            public void onError(final AccountKitError error) {}
         });
     }
 }

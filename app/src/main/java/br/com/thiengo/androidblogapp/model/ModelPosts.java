@@ -7,12 +7,12 @@ import br.com.thiengo.androidblogapp.presenter.PresenterPosts;
 
 
 public class ModelPosts {
-    private static final String URI = "http://192.168.25.221:8888/blog-android-app/ctrl/CtrlPost.php";
-    private static final String METODO_KEY = "metodo";
+    private static final String CTRL = "CtrlPost.php";
     private static final String METODO_POSTS = "get-posts";
 
     private AsyncHttpClient asyncHttpClient;
     private PresenterPosts presenter;
+
 
     public ModelPosts(PresenterPosts presenter ){
         asyncHttpClient = new AsyncHttpClient();
@@ -20,13 +20,13 @@ public class ModelPosts {
     }
 
     public void retrievePosts() {
-        RequestParams requestParams = new RequestParams();
-        requestParams.put( METODO_KEY, METODO_POSTS );
+        RequestParams params = new RequestParams();
+        params.put( JsonHttpRequest.METODO_KEY, METODO_POSTS );
 
         asyncHttpClient.post(
             presenter.getContext(),
-            URI,
-            requestParams,
+            JsonHttpRequest.URI + CTRL,
+            params,
             new JsonHttpRequest( presenter ));
     }
 }

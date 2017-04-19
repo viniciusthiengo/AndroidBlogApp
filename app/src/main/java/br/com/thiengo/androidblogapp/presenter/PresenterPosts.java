@@ -13,7 +13,7 @@ import br.com.thiengo.androidblogapp.view.PostsActivity;
 
 public class PresenterPosts {
     private User user;
-    private ModelPosts modelPosts;
+    private ModelPosts model;
     private PostsActivity activity;
     private ArrayList<Post> posts = new ArrayList<>();
 
@@ -21,7 +21,7 @@ public class PresenterPosts {
     public PresenterPosts( PostsActivity a ){
         activity = a;
         user = a.getIntent().getParcelableExtra(User.KEY);
-        modelPosts = new ModelPosts( this );
+        model = new ModelPosts( this );
     }
 
     public User getUser(){
@@ -32,19 +32,12 @@ public class PresenterPosts {
         return activity;
     }
 
-    public void retrievePosts( Bundle instanceState ) {
-
-        if( instanceState != null ){
-            posts.addAll( (ArrayList) instanceState.getParcelableArrayList( Post.POSTS_KEY ) );
-        }
-        else{
-            modelPosts.retrievePosts();
-        }
+    public ArrayList<Post> getPosts() {
+        return posts;
     }
 
-    public void showProgressBar(boolean status) {
-        int visibilidade = status ? View.VISIBLE : View.GONE;
-        activity.showProgressBar( visibilidade );
+    public void retrievePosts() {
+        model.retrievePosts();
     }
 
     public void updateListaRecycler(Object object) {
@@ -55,7 +48,8 @@ public class PresenterPosts {
         showProgressBar( !(posts.size() > 0) );
     }
 
-    public ArrayList<Post> getPosts() {
-        return posts;
+    public void showProgressBar(boolean status) {
+        int visibilidade = status ? View.VISIBLE : View.GONE;
+        activity.showProgressBar( visibilidade );
     }
 }

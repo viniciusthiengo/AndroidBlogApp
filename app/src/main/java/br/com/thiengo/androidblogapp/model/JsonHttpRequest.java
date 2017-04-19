@@ -17,6 +17,9 @@ import cz.msebera.android.httpclient.Header;
 
 
 class JsonHttpRequest extends JsonHttpResponseHandler {
+    public static final String URI = "http://192.168.25.221:8888/blog-android-app/ctrl/";
+    public static final String METODO_KEY = "metodo";
+
     private PresenterPosts presenterPosts;
     private PresenterLogin presenterLogin;
 
@@ -66,6 +69,4 @@ class JsonHttpRequest extends JsonHttpResponseHandler {
 
         presenterLogin.resultLogin( user );
     }
-
-
 }

@@ -15,12 +15,12 @@ import br.com.thiengo.androidblogapp.R;
 import br.com.thiengo.androidblogapp.presenter.Post;
 
 
-public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
-
+class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
     private PostsActivity context;
     private List<Post> posts;
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+
+    class ViewHolder extends RecyclerView.ViewHolder{
         ImageView ivThumb;
         TextView tvTitulo;
         TextView tvSumario;
@@ -43,7 +43,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         }
     }
 
-    public PostsAdapter(PostsActivity context, List<Post> posts ){
+    PostsAdapter(PostsActivity context, List<Post> posts ){
         this.context = context;
         this.posts = posts;
     }

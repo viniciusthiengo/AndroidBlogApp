@@ -4,9 +4,6 @@ import android.app.Application;
 
 import com.facebook.accountkit.AccountKit;
 
-/**
- * Created by viniciusthiengo on 18/04/17.
- */
 
 public class App extends Application {
 

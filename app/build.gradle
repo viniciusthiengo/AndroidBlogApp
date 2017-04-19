@@ -35,9 +35,6 @@ dependencies {
     compile 'com.loopj.android:android-async-http:1.4.9'
     compile 'com.google.code.gson:gson:2.7'
 
-    /* PARA QUE SEJA POSSÍVEL A COLETA DE EVENTOS */
-    //compile 'com.facebook.android:facebook-android-sdk:4.+'
-
     /* REFERENTE AO ACCOUNT KIT */
     compile 'com.facebook.android:account-kit-sdk:4.+'
 }
