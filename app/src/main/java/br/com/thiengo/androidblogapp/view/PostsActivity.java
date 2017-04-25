@@ -1,5 +1,6 @@
 package br.com.thiengo.androidblogapp.view;
 
+import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -11,6 +12,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,13 +22,16 @@ import com.squareup.picasso.Picasso;
 
 import br.com.thiengo.androidblogapp.R;
 import br.com.thiengo.androidblogapp.presenter.Post;
+import br.com.thiengo.androidblogapp.presenter.PresenterLogin;
 import br.com.thiengo.androidblogapp.presenter.PresenterPosts;
 
 public class PostsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private PresenterPosts presenter;
+    private RecyclerView recyclerView;
     private PostsAdapter adapter;
+    public static boolean isOpened;
 
 
     @Override
@@ -38,14 +43,29 @@ public class PostsActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         toolbarFontFamily( toolbar );
 
-        presenter = new PresenterPosts( this );
+        presenter = PresenterPosts.getInstance(this);
         initDrawer( toolbar );
         initLista();
 
         presenter.retrievePosts();
+
+        PresenterLogin presenterLogin = new PresenterLogin(this);
+        presenterLogin.sendToken();
     }
 
-    private void toolbarFontFamily( Toolbar toolbar ){
+    @Override
+    protected void onStart() {
+        super.onStart();
+        isOpened = true;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        isOpened = false;
+    }
+
+    private void toolbarFontFamily(Toolbar toolbar ){
         TextView tv = (TextView) toolbar.getChildAt(0);
         Typeface font = Typeface.createFromAsset( getAssets(), "Timmana.ttf" );
         tv.setTypeface( font );
@@ -58,8 +78,11 @@ public class PostsActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        int itemSelected = getIntent().getIntExtra( Post.CATEGORIA_KEY, 0 );
+
         NavigationView navigation = (NavigationView) findViewById(R.id.nav_view);
         navigation.setNavigationItemSelectedListener(this);
+        navigation.getMenu().getItem( itemSelected ).setChecked(true);
         setDataDrawerHeaderData( navigation );
     }
 
@@ -81,7 +104,7 @@ public class PostsActivity extends AppCompatActivity
     private void initLista() {
         super.onStart();
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_posts);
+        recyclerView = (RecyclerView) findViewById(R.id.rv_posts);
         recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager mLayoutManager = new LinearLayoutManager( this );
@@ -100,6 +123,16 @@ public class PostsActivity extends AppCompatActivity
         adapter.notifyDataSetChanged();
     }
 
+    public void updateListaRecycler( final int posicao ){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                adapter.notifyItemInserted( posicao );
+                recyclerView.scrollToPosition(0);
+            }
+        });
+    }
+
     public void showProgressBar( int visibilidade ){
         findViewById(R.id.pb_loading).setVisibility( visibilidade );
     }
@@ -109,9 +142,9 @@ public class PostsActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.nav_conf_notif) {
+        /*if (id == R.id.nav_conf_notif) {
 
-        }
+        }*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -123,7 +156,8 @@ public class PostsActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        }
+        else {
             super.onBackPressed();
         }
     }

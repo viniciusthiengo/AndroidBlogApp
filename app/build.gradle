@@ -37,4 +37,10 @@ dependencies {
 
     /* REFERENTE AO ACCOUNT KIT */
     compile 'com.facebook.android:account-kit-sdk:4.+'
+
+    /* FIREBASE */
+        /* Cloud Messaging / Notifications */
+        compile 'com.google.firebase:firebase-messaging:9.6.1'
 }
+
+apply plugin: 'com.google.gms.google-services'

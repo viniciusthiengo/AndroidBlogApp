@@ -1,5 +1,7 @@
 package br.com.thiengo.androidblogapp.model;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -67,6 +69,21 @@ class JsonHttpRequest extends JsonHttpResponseHandler {
         Gson gson = new Gson();
         User user = gson.fromJson( response.toString(), User.class );
 
-        presenterLogin.resultLogin( user );
+        try{
+            /*
+             * PARA REGISTRO DE TOKEN, CASO O TOKEN TENHA SIDO
+             * REGISTRADO COM SUCESSO, MARQUE NO SP PARA QUE
+             * NÃO SEJA NECESSÁRIO UM NOVO ENVIO COM OS MESMOS
+             * ID E TOKEN
+             * */
+            if( response.has("resultado")
+                && response.getInt("resultado") == 1 ){
+                SPUtil.saveStatusTokenServer( presenterLogin.getContext(), true );
+            }
+            else if( user != null ){
+                presenterLogin.resultLogin( user );
+            }
+        }
+        catch( JSONException e){}
     }
 }

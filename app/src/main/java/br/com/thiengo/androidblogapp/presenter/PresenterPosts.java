@@ -1,7 +1,7 @@
 package br.com.thiengo.androidblogapp.presenter;
 
 import android.app.Activity;
-import android.os.Bundle;
+import android.content.Context;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -12,15 +12,23 @@ import br.com.thiengo.androidblogapp.view.PostsActivity;
 
 
 public class PresenterPosts {
+    private static PresenterPosts instance;
     private User user;
     private ModelPosts model;
-    private PostsActivity activity;
+    private Context context;
     private ArrayList<Post> posts = new ArrayList<>();
 
 
-    public PresenterPosts( PostsActivity a ){
-        activity = a;
-        user = a.getIntent().getParcelableExtra(User.KEY);
+    public static PresenterPosts getInstance( Context c ){
+        if( instance == null ){
+            instance = new PresenterPosts( c );
+        }
+        return instance;
+    }
+
+    private PresenterPosts( Context a ){
+        context = a;
+        user = ((Activity) a).getIntent().getParcelableExtra(User.KEY);
         model = new ModelPosts( this );
     }
 
@@ -28,8 +36,8 @@ public class PresenterPosts {
         return user;
     }
 
-    public Activity getContext() {
-        return activity;
+    public Context getContext() {
+        return context;
     }
 
     public ArrayList<Post> getPosts() {
@@ -44,12 +52,17 @@ public class PresenterPosts {
         List<Post> postsCarregados = (List<Post>) object;
         posts.clear();
         posts.addAll( postsCarregados );
-        activity.updateListaRecycler();
+        ((PostsActivity) context).updateListaRecycler();
         showProgressBar( !(posts.size() > 0) );
     }
 
     public void showProgressBar(boolean status) {
         int visibilidade = status ? View.VISIBLE : View.GONE;
-        activity.showProgressBar( visibilidade );
+        ((PostsActivity) context).showProgressBar( visibilidade );
+    }
+
+    public void updateListaRecycler(Post post) {
+        posts.add( 0, post );
+        ((PostsActivity) context).updateListaRecycler( 0 );
     }
 }

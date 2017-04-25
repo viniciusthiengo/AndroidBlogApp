@@ -13,8 +13,10 @@ public class User implements Parcelable {
     private String profissao;
     private String uriImagem;
     private boolean logged;
+    private String token;
 
 
+    public User(){}
     public User( String id, String email ){
         this.id = id;
         this.email = email;
@@ -68,6 +70,17 @@ public class User implements Parcelable {
         this.logged = logged;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public boolean ehValidoEnviarToken() {
+        return id != null && token != null;
+    }
 
     @Override
     public int describeContents() {
@@ -82,6 +95,7 @@ public class User implements Parcelable {
         dest.writeString(this.profissao);
         dest.writeString(this.uriImagem);
         dest.writeByte(this.logged ? (byte) 1 : (byte) 0);
+        dest.writeString(this.token);
     }
 
     protected User(Parcel in) {
@@ -91,9 +105,10 @@ public class User implements Parcelable {
         this.profissao = in.readString();
         this.uriImagem = in.readString();
         this.logged = in.readByte() != 0;
+        this.token = in.readString();
     }
 
-    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+    public static final Creator<User> CREATOR = new Creator<User>() {
         @Override
         public User createFromParcel(Parcel source) {
             return new User(source);
