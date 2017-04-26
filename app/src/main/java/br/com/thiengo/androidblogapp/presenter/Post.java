@@ -1,9 +1,5 @@
 package br.com.thiengo.androidblogapp.presenter;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-
 public class Post {
     public static final String POST_KEY = "post";
     public static final String CATEGORIA_KEY = "categoria";

@@ -3,24 +3,32 @@ package br.com.thiengo.androidblogapp.presenter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.IntegerRes;
-import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.gson.Gson;
 
 import br.com.thiengo.androidblogapp.model.ModelLogin;
 import br.com.thiengo.androidblogapp.model.SPUtil;
-import br.com.thiengo.androidblogapp.view.LoginActivity;
 import br.com.thiengo.androidblogapp.view.PostsActivity;
 
 
 public class PresenterLogin {
+    private static PresenterLogin instance;
     private ModelLogin model;
     private Context context;
 
 
-    public PresenterLogin( Context c ){
+    public static PresenterLogin getInstance( Context c ){
+        if( instance == null ){
+            instance = new PresenterLogin( c );
+        }
+        return instance;
+    }
+
+    public static void clearInstance(){
+        instance = null;
+    }
+
+    private PresenterLogin( Context c ){
         context = c;
         model = new ModelLogin( this );
     }
@@ -35,7 +43,7 @@ public class PresenterLogin {
 
     public void resultLogin( User user ) {
         if( user.isLogged() ){
-            SPUtil.saveUserId(context, user );
+            SPUtil.saveUserId(context, user);
 
             Intent it = new Intent( context, PostsActivity.class );
             it.putExtra( User.KEY, user );
@@ -46,25 +54,23 @@ public class PresenterLogin {
         }
     }
 
-    private int getCategoria() {
+    private int getCategoria(){
         Intent it = ((Activity) context).getIntent();
 
-        if( it != null
-                && it.hasExtra( Post.CATEGORIA_KEY ) ){
-
-            return Integer.parseInt( it.getStringExtra( Post.CATEGORIA_KEY ) );
+        if( it != null && it.hasExtra( Post.CATEGORIA_KEY ) ){
+            return Integer.parseInt( it.getStringExtra(Post.CATEGORIA_KEY) );
         }
         return 0;
     }
 
+
     public void sendToken() {
         User user = new User();
-        user.setId( SPUtil.getUserId(context) );
+        user.setId( SPUtil.getUserId( context ) );
         user.setToken( FirebaseInstanceId.getInstance().getToken() );
 
         if( !SPUtil.statusTokenServer(context)
-            && user.ehValidoEnviarToken() ){
-
+                && user.ehValidoEnviarToken() ){
             model.sendToken( user );
         }
     }

@@ -3,7 +3,6 @@ package br.com.thiengo.androidblogapp.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.facebook.accountkit.Account;
@@ -36,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
          * PARA POSTERIOR ENVIO / VERIFICAÇÃO DE DADOS
          * NO BACKEND WEB
          * */
-        presenter = new PresenterLogin( LoginActivity.this );
+        presenter = PresenterLogin.getInstance( LoginActivity.this );
 
         /* VERIFICA SE O USUÁRIO JÁ ESTÁ CONECTADO */
         if (AccountKit.getCurrentAccessToken() != null) {
@@ -106,5 +105,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onError(final AccountKitError error) {}
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        /* PARA EVITAR VAZAMENTO DE MEMÓRIA */
+        PresenterLogin.clearInstance();
     }
 }

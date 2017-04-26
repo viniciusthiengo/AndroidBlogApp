@@ -78,9 +78,10 @@ public class User implements Parcelable {
         this.token = token;
     }
 
-    public boolean ehValidoEnviarToken() {
+    public boolean ehValidoEnviarToken(){
         return id != null && token != null;
     }
+
 
     @Override
     public int describeContents() {

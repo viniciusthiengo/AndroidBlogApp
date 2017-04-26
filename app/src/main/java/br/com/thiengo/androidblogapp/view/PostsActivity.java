@@ -1,6 +1,5 @@
 package br.com.thiengo.androidblogapp.view;
 
-import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -12,7 +11,6 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,11 +27,11 @@ public class PostsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private PresenterPosts presenter;
-    private RecyclerView recyclerView;
     private PostsAdapter adapter;
     public static boolean isOpened;
+    private RecyclerView recyclerView;
 
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,20 +47,8 @@ public class PostsActivity extends AppCompatActivity
 
         presenter.retrievePosts();
 
-        PresenterLogin presenterLogin = new PresenterLogin(this);
+        PresenterLogin presenterLogin = PresenterLogin.getInstance(this);
         presenterLogin.sendToken();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        isOpened = true;
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        isOpened = false;
     }
 
     private void toolbarFontFamily(Toolbar toolbar ){
@@ -78,7 +64,7 @@ public class PostsActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        int itemSelected = getIntent().getIntExtra( Post.CATEGORIA_KEY, 0 );
+        int itemSelected = getIntent().getIntExtra( Post.CATEGORIA_KEY, 0);
 
         NavigationView navigation = (NavigationView) findViewById(R.id.nav_view);
         navigation.setNavigationItemSelectedListener(this);
@@ -123,12 +109,12 @@ public class PostsActivity extends AppCompatActivity
         adapter.notifyDataSetChanged();
     }
 
-    public void updateListaRecycler( final int posicao ){
+    public void updateListaRecycler( final int position ){
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                adapter.notifyItemInserted( posicao );
-                recyclerView.scrollToPosition(0);
+                adapter.notifyItemInserted( position );
+                recyclerView.scrollToPosition( position );
             }
         });
     }
@@ -160,5 +146,25 @@ public class PostsActivity extends AppCompatActivity
         else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        isOpened = true;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        isOpened = false;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        /* PARA EVITAR VAZAMENTO DE MEMÓRIA */
+        PresenterPosts.clearInstance();
+        PresenterLogin.clearInstance();
     }
 }

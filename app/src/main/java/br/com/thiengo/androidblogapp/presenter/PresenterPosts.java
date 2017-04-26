@@ -26,9 +26,13 @@ public class PresenterPosts {
         return instance;
     }
 
-    private PresenterPosts( Context a ){
-        context = a;
-        user = ((Activity) a).getIntent().getParcelableExtra(User.KEY);
+    public static void clearInstance(){
+        instance = null;
+    }
+
+    private PresenterPosts( Context c ){
+        context = c;
+        user = ((Activity) c).getIntent().getParcelableExtra(User.KEY);
         model = new ModelPosts( this );
     }
 
@@ -56,13 +60,13 @@ public class PresenterPosts {
         showProgressBar( !(posts.size() > 0) );
     }
 
+    public void updateListaRecycler( Post post ) {
+        posts.add( 0, post );
+        ((PostsActivity) context).updateListaRecycler( 0 );
+    }
+
     public void showProgressBar(boolean status) {
         int visibilidade = status ? View.VISIBLE : View.GONE;
         ((PostsActivity) context).showProgressBar( visibilidade );
-    }
-
-    public void updateListaRecycler(Post post) {
-        posts.add( 0, post );
-        ((PostsActivity) context).updateListaRecycler( 0 );
     }
 }

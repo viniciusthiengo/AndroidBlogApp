@@ -11,8 +11,8 @@ public class ModelLogin {
     private static final String CTRL = "CtrlUser.php";
     private static final String ID_KEY = "id";
     private static final String EMAIL_KEY = "email";
-    private static final String TOKEN_KEY = "token";
     private static final String METODO_LOGIN = "login";
+    private static final String TOKEN_KEY = "token";
     private static final String METODO_TOKEN = "registrar-token-notificacao";
 
     private AsyncHttpClient asyncHttpClient;
@@ -37,7 +37,6 @@ public class ModelLogin {
             new JsonHttpRequest( presenter ));
     }
 
-
     public void sendToken(User user) {
         RequestParams params = new RequestParams();
         params.put( JsonHttpRequest.METODO_KEY, METODO_TOKEN );
@@ -45,9 +44,9 @@ public class ModelLogin {
         params.put( TOKEN_KEY, user.getToken() );
 
         asyncHttpClient.post(
-            presenter.getContext(),
-            JsonHttpRequest.URI + CTRL,
-            params,
-            new JsonHttpRequest( presenter ));
+                presenter.getContext(),
+                JsonHttpRequest.URI + CTRL,
+                params,
+                new JsonHttpRequest( presenter ));
     }
 }

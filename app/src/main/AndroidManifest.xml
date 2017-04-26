@@ -57,27 +57,18 @@
 
 
         <service
-            android:name=".model.CustomFirebaseMessagingService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-            </intent-filter>
-        </service>
-
-        <service
-            android:name=".model.CustomFirebaseInstanceIDService">
+            android:name=".model.CustomFirebaseInstaceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>
         </service>
 
-
-        <activity
-            android:name=".view.TestIntentActivity">
+        <service
+            android:name=".model.CustomFirebaseMessagingService">
             <intent-filter>
-                <action android:name="OPEN_ACTIVITY_TEST" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
-        </activity>
+        </service>
     </application>
 
 </manifest>
