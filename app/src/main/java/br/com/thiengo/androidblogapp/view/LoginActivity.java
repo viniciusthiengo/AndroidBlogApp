@@ -1,8 +1,12 @@
 package br.com.thiengo.androidblogapp.view;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.facebook.accountkit.Account;
@@ -114,3 +118,4 @@ public class LoginActivity extends AppCompatActivity {
         PresenterLogin.clearInstance();
     }
 }
+

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "206885933907",
+    "firebase_url": "https://android-blog-app-ea8a8.firebaseio.com",
+    "project_id": "android-blog-app-ea8a8",
+    "storage_bucket": "android-blog-app-ea8a8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:206885933907:android:7eee85fea101eee1",
+        "android_client_info": {
+          "package_name": "br.com.thiengo.androidblogapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "206885933907-3gpnk07f16n8st3a3fr0tc9sc5nlskkh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbY8dW5XN61dV6PJz4kFlfV4x-EfCcv0w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

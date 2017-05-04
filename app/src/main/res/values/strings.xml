@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Android Blog App</string>
+    <string name="activity_notification">Configurações de notificação</string>
 
     <string name="navigation_drawer_open">Abrir navigation drawer</string>
     <string name="navigation_drawer_close">Fechar navigation drawer</string>

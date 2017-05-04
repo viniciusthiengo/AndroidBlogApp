@@ -1,5 +1,6 @@
 package br.com.thiengo.androidblogapp.view;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -16,11 +17,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.squareup.picasso.Picasso;
 
 import br.com.thiengo.androidblogapp.R;
 import br.com.thiengo.androidblogapp.presenter.Post;
 import br.com.thiengo.androidblogapp.presenter.PresenterLogin;
+import br.com.thiengo.androidblogapp.presenter.PresenterNotificacao;
 import br.com.thiengo.androidblogapp.presenter.PresenterPosts;
 
 public class PostsActivity extends AppCompatActivity
@@ -49,6 +52,9 @@ public class PostsActivity extends AppCompatActivity
 
         PresenterLogin presenterLogin = PresenterLogin.getInstance(this);
         presenterLogin.sendToken();
+
+        PresenterNotificacao presenterNotificacao = new PresenterNotificacao(this);
+        presenterNotificacao.configPrimeiraAbertura();
     }
 
     private void toolbarFontFamily(Toolbar toolbar ){
@@ -73,6 +79,17 @@ public class PostsActivity extends AppCompatActivity
     }
 
     private void setDataDrawerHeaderData( NavigationView navigation ){
+        /*
+         * CLÁUSULA DE GUARDA PARA QUE NÃO ACONTEÇA
+         * UM NULLPOINTEREXCEPTION
+         * */
+        if( presenter.getUser().getUriImagem() == null
+            || presenter.getUser().getNome() == null
+            || presenter.getUser().getProfissao() == null ){
+
+            return;
+        }
+
         LinearLayout ll = (LinearLayout) navigation.getHeaderView(0);
 
         ImageView ivProfile = (ImageView) ll.getChildAt(0);
@@ -128,9 +145,11 @@ public class PostsActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        /*if (id == R.id.nav_conf_notif) {
-
-        }*/
+        if (id == R.id.nav_conf_notif) {
+            Intent intent = new Intent(this, NotificacaoActivity.class);
+            startActivity(intent);
+            return false;
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
