@@ -2,39 +2,22 @@ package br.com.thiengo.androidblogapp.view;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
+import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.squareup.picasso.Picasso;
-
 import br.com.thiengo.androidblogapp.R;
-import br.com.thiengo.androidblogapp.model.SPUtil;
-import br.com.thiengo.androidblogapp.presenter.Post;
-import br.com.thiengo.androidblogapp.presenter.PresenterLogin;
 import br.com.thiengo.androidblogapp.presenter.PresenterNotificacao;
-import br.com.thiengo.androidblogapp.presenter.PresenterPosts;
 
 public class NotificacaoActivity extends AppCompatActivity
         implements CompoundButton.OnCheckedChangeListener {
 
     private PresenterNotificacao presenter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +57,7 @@ public class NotificacaoActivity extends AppCompatActivity
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton cb, boolean b) {
-        presenter.onCheckedChanged(cb, b);
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        presenter.onCheckedChanged(compoundButton, b);
     }
 }

@@ -2,38 +2,23 @@ package br.com.thiengo.androidblogapp.presenter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import br.com.thiengo.androidblogapp.R;
-import br.com.thiengo.androidblogapp.model.ModelLogin;
 import br.com.thiengo.androidblogapp.model.SPUtil;
-import br.com.thiengo.androidblogapp.view.PostsActivity;
 
+/**
+ * Created by viniciusthiengo on 04/05/17.
+ */
 
 public class PresenterNotificacao {
     private Context context;
 
     public PresenterNotificacao( Context c ){
-        context = c;
-    }
-
-    public void configPrimeiraAbertura() {
-        if( !SPUtil.statusPrimeiraAbertura(context) ){
-            return;
-        }
-
-        onCheckedChanged( getCategoria(R.id.categoria_1), true);
-        onCheckedChanged( getCategoria(R.id.categoria_2), true);
-        onCheckedChanged( getCategoria(R.id.categoria_3), true);
-        onCheckedChanged( getCategoria(R.id.categoria_4), true);
-        onCheckedChanged( getCategoria(R.id.categoria_5), true);
-
-        SPUtil.saveStatusPrimeiraAbertura(context, false);
+        this.context = c;
     }
 
     public void setCheckBoxConf( int id ){
@@ -60,18 +45,33 @@ public class PresenterNotificacao {
         }
     }
 
-    public void onCheckedChanged(CompoundButton cb, boolean b) {
-        String categoria = getCategoria( cb.getId() );
-        onCheckedChanged(categoria, b);
+    public void onCheckedChanged(CompoundButton compoundButton, boolean status) {
+        String categoria = getCategoria( compoundButton.getId() );
+        onCheckedChanged(categoria, status);
     }
 
     private void onCheckedChanged(String categoria, boolean status) {
         if( status ){
             FirebaseMessaging.getInstance().subscribeToTopic( categoria );
         }
-        else {
+        else{
             FirebaseMessaging.getInstance().unsubscribeFromTopic( categoria );
         }
+
         SPUtil.saveStatusCategoria(context, categoria, status);
+    }
+
+    public void configPrimeiraAbertura(){
+        if( SPUtil.statusPrimeiraAbertura( context ) ){
+            return;
+        }
+
+        onCheckedChanged( getCategoria(R.id.categoria_1), true);
+        onCheckedChanged( getCategoria(R.id.categoria_2), true);
+        onCheckedChanged( getCategoria(R.id.categoria_3), true);
+        onCheckedChanged( getCategoria(R.id.categoria_4), true);
+        onCheckedChanged( getCategoria(R.id.categoria_5), true);
+
+        SPUtil.saveStatusPrimeiraAbertura(context, true);
     }
 }

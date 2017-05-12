@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.squareup.picasso.Picasso;
 
 import br.com.thiengo.androidblogapp.R;
@@ -145,7 +144,7 @@ public class PostsActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.nav_conf_notif) {
+        if( id == R.id.nav_conf_notif ){
             Intent intent = new Intent(this, NotificacaoActivity.class);
             startActivity(intent);
             return false;

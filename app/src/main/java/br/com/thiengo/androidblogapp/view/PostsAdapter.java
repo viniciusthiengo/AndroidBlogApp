@@ -1,5 +1,6 @@
 package br.com.thiengo.androidblogapp.view;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +21,8 @@ class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
     private List<Post> posts;
 
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
         ImageView ivThumb;
         TextView tvTitulo;
         TextView tvSumario;
@@ -31,6 +33,8 @@ class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
             ivThumb = (ImageView) itemView.findViewById(R.id.iv_thumb);
             tvTitulo = (TextView) itemView.findViewById(R.id.tv_titulo);
             tvSumario = (TextView) itemView.findViewById(R.id.tv_sumario);
+
+            itemView.setOnClickListener(this);
         }
 
         private void setData( Post post ){
@@ -40,6 +44,13 @@ class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
 
             tvTitulo.setText( post.getTitulo() );
             tvSumario.setText( post.getSumario() );
+        }
+
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent( context, PostContentActivity.class );
+            intent.putExtra( Post.POST_KEY, posts.get( getAdapterPosition() ) );
+            context.startActivity( intent );
         }
     }
 

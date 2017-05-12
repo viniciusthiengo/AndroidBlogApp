@@ -1,12 +1,10 @@
 package br.com.thiengo.androidblogapp.view;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.facebook.accountkit.Account;
@@ -29,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     public static final int APP_REQUEST_CODE = 665;
 
     private PresenterLogin presenter;
+    public static boolean isOpened;
 
 
     @Override
@@ -48,6 +47,9 @@ public class LoginActivity extends AppCompatActivity {
         else{
             onLoginEmail();
         }
+
+        NotificationManager notifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notifyManager.cancelAll();
     }
 
     public void onLoginEmail() {
@@ -116,6 +118,19 @@ public class LoginActivity extends AppCompatActivity {
         super.onDestroy();
         /* PARA EVITAR VAZAMENTO DE MEMÓRIA */
         PresenterLogin.clearInstance();
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        isOpened = true;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        isOpened = false;
     }
 }
 

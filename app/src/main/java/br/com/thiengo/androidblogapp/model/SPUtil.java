@@ -5,9 +5,6 @@ import android.content.SharedPreferences;
 
 import br.com.thiengo.androidblogapp.presenter.User;
 
-/**
- * Created by viniciusthiengo on 25/04/17.
- */
 
 public class SPUtil {
     private static final String PREF = "PREF";
@@ -37,7 +34,6 @@ public class SPUtil {
         return sp.getBoolean(STATUS_KEY, false);
     }
 
-
     public static void saveStatusCategoria(Context context, String key, boolean status){
         SharedPreferences sp = context.getSharedPreferences(PREF, MODE);
         sp.edit().putBoolean(key, status).apply();
@@ -56,6 +52,6 @@ public class SPUtil {
 
     public static boolean statusPrimeiraAbertura(Context context){
         SharedPreferences sp = context.getSharedPreferences(PREF, MODE);
-        return sp.getBoolean(PRIMEIRA_ABERTURA_KEY, true);
+        return sp.getBoolean(PRIMEIRA_ABERTURA_KEY, false);
     }
 }
