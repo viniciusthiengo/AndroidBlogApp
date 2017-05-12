@@ -83,8 +83,7 @@ public class PostsActivity extends AppCompatActivity
          * UM NULLPOINTEREXCEPTION
          * */
         if( presenter.getUser().getUriImagem() == null
-            || presenter.getUser().getNome() == null
-            || presenter.getUser().getProfissao() == null ){
+            || presenter.getUser().getUriImagem().isEmpty() ){
 
             return;
         }
