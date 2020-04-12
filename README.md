@@ -1,6 +1,6 @@
-# Android Blog App (Kotlin Android)
+# Android Blog App (Java Android)
 
-Projeto Kotlin Android da segunda parte do artigo [FCM Android - Domínio do Problema, Implementação e Testes Com Servidor de Aplicativo](https://www.thiengo.com.br/fcm-android-dominio-do-problema-implementacao-e-testes-com-servidor-de-aplicativo-parte-1#title-13) do Blog [Thiengo.com.br](https://www.thiengo.com.br).
+Projeto Java Android da segunda parte do artigo [FCM Android - Domínio do Problema, Implementação e Testes Com Servidor de Aplicativo](https://www.thiengo.com.br/fcm-android-dominio-do-problema-implementacao-e-testes-com-servidor-de-aplicativo-parte-1#title-13) do Blog [Thiengo.com.br](https://www.thiengo.com.br).
 
 Artigo que discute em detalhes a API nativa Android para notificações push, mais precisamente a API Firebase Cloud Messaging (FCM) que veio para substituir a antiga e muito utilizada Google Cloud Messaging (GCM).
 
