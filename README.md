@@ -6,7 +6,7 @@ Artigo que discute em detalhes a API nativa Android para notificações push, ma
 
 <img src="https://www.thiengo.com.br/img/post/normal/nnlpkibnlumpti5s0ird35kpu527eddab8d3ac2adb71ad7224818bf89b.jpg" width="660" alt="Aplicativo Android com o FCM rodando em notificações">
 
-O conteúdo do artigo também está disponível em [vídeos](https://www.thiengo.com.br/fcm-android-dominio-do-problema-implementacao-e-testes-com-servidor-de-aplicativo-parte-1#title-30).
+O conteúdo do artigo também está disponível em [vídeo](https://www.thiengo.com.br/fcm-android-dominio-do-problema-implementacao-e-testes-com-servidor-de-aplicativo-parte-1#title-30).
 
 ### Lado Web ⚠
 
