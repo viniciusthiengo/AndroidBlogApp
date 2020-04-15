@@ -12,7 +12,7 @@ O conteúdo do artigo também está disponível em [vídeo](https://www.thiengo.
 
 É muito importante que antes de seguir com o projeto Android deste conteúdo sobre a API FCM que você primeiro estude e implemente a parte Web de todo o projeto.
 
-Parte presente [nesta parte do artigo](https://www.thiengo.com.br/fcm-android-dominio-do-problema-implementacao-e-testes-com-servidor-de-aplicativo-parte-1#title-02) e também no GitHub [lado Web do projeto Android Blog App](https://github.com/viniciusthiengo/blog-android-app-web)
+Parte presente [neste trecho do artigo](https://www.thiengo.com.br/fcm-android-dominio-do-problema-implementacao-e-testes-com-servidor-de-aplicativo-parte-1#title-02) e também no GitHub [lado Web do projeto Android Blog App](https://github.com/viniciusthiengo/blog-android-app-web).
 
 ### Primeira parte
 
